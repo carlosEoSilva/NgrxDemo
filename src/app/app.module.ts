@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {MatCardModule} from '@angular/material/card';
     RouterModule.forRoot([]),
     
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    StoreModule.forRoot({}, {})
   ],
   providers: [],
   bootstrap: [AppComponent]
