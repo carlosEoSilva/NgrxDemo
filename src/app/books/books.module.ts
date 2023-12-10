@@ -12,6 +12,8 @@ import {MatCardModule} from '@angular/material/card';
 //-Redux
 import { StoreModule } from '@ngrx/store';
 import { bookReducer } from './store/books.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { BooksEffects } from './store/books.effects';
 
 
 @NgModule({
@@ -23,6 +25,7 @@ import { bookReducer } from './store/books.reducer';
     BooksRoutingModule,
     MatCardModule,
     StoreModule.forFeature('mybooks', bookReducer),
+    EffectsModule.forFeature([BooksEffects])
   ]
 })
 export class BooksModule { }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BooksService } from '../books.service';
 import { Store, select } from '@ngrx/store';
 import { selectBooks } from '../store/books.selector';
-import { invokeBooksAPI } from '../store/books.action';
+import { invokeBooksApi } from '../store/books.action';
 
 @Component({
   selector: 'app-home',
@@ -19,9 +19,9 @@ export class HomeComponent implements OnInit {
   books$= this._store.pipe(select(selectBooks));
 
   ngOnInit(): void {
-    console.log(this._service.getBooks()); 
+    // console.log(this._service.getBooks()); 
 
-    this._store.dispatch(invokeBooksAPI())
+    this._store.dispatch(invokeBooksApi())
   }
 
 }

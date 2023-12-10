@@ -1,15 +1,12 @@
-import { createReducer } from "@ngrx/store";
-import { Book } from "./book";
+import { createReducer, on } from "@ngrx/store";
+import { Book } from "./book.interface";
+import { booksFetchApiSuccess } from "./books.action";
 
-export const initialState: ReadonlyArray<Book>= [
-    {
-        "id": 1,
-        "title": "Harry Pother and the Philosopher's stone",
-        "author": "J.K. Rowling",
-        "cost": 300
-      }
-];
+export const initialState: ReadonlyArray<Book>= [];
 
 export const bookReducer= createReducer(
-    initialState
+    initialState,
+    on(booksFetchApiSuccess, (state, { allBooks })=>{
+        return allBooks;
+    })
 )
