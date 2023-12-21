@@ -1,6 +1,13 @@
-export interface Book{
-    id:number;
-    title:string;
-    author:string;
-    cost:number;
+import { Book } from "./book.class";
+
+export interface IBook{
+    Id:number;
+    Title:string;
+    Author:string;
+    Cover:string;
+    Price:number;
+}
+
+export interface IBookState{
+    books:Book[]
 }

@@ -6,25 +6,28 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
-import { MatButtonModule } from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { appReducer } from './shared/store/app.reducer';
+import { SnackbarComponent } from './shared/snackbar/snackbar.component';
+import { DialogComponent } from './shared/dialog/dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    SnackbarComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([]),
-    
-    MatButtonModule,
-    MatCardModule,
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([])
+    StoreModule.forRoot({ myappstate: appReducer}),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]

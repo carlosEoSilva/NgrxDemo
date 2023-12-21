@@ -1,4 +1,4 @@
-<!-- video 51:29 -->
+<!-- video 02:14 -->
 
 <html lang="en">
 
@@ -9,22 +9,19 @@
 </head>
 
 <body>
-
   <header id="nav-wrapper">
     <nav id="nav">
       <div class="nav left">
-        <span class="gradient skew"><h1 class="logo un-skew"><a href="#home">Book Store</a></h1></span>
-        <button id="menu" class="btn-nav"><span class="fas fa-bars"></span></button>
+        <span class="gradient skew"><h1 class="logo un-skew">Book Store</h1></span>
       </div>
       <div class="nav right">
-        <a href="#home" class="nav-link"><span class="nav-link-span"><span class="u-nav">Home</span></span></a>
-        <a href="#about" class="nav-link"><span class="nav-link-span"><span class="u-nav">About</span></span></a>
-        <a href="#work" class="nav-link"><span class="nav-link-span"><span class="u-nav">Work</span></span></a>
-        <a href="#contact" class="nav-link"><span class="nav-link-span"><span class="u-nav">Contact</span></span></a>
+        <a routerLink="/home" class="nav-link"><span class="nav-link-span"><span class="u-nav">Home</span></span></a>
+        <a routerLink="/add" class="nav-link"><span class="nav-link-span"><span class="u-nav">Add Book</span></span></a>
+        <a routerLink="" class="nav-link"><span class="nav-link-span"><span class="u-nav">About</span></span></a>
       </div>
     </nav>
   </header>
-  <main>
+  <main id="main">
     <section id="home">
         <router-outlet></router-outlet>
     </section>

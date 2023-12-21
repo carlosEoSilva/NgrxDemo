@@ -1,0 +1,39 @@
+form{
+    width: 50%;
+    margin: auto;
+    align-content: center;
+}
+
+.form-input{
+    display: inline;
+    margin: 5px;
+}
+
+.btn-save{
+    display: block;
+    background-color: #f64949e6;
+    color: #eee9e9;
+    width: 100px;
+    margin: auto;
+}
+
+.cover-preview{
+    width: 250px;
+    height: 300px;
+}
+
+.form-container{
+    display: inline-block;
+    width: 70%;
+    margin: 0;
+}
+
+.cover-container{
+    display: inline-block;
+    width: 20%;
+    margin: 0;
+}
+
+.add-container{
+    align-content: center;
+}

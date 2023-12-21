@@ -19,8 +19,6 @@ export class HomeComponent implements OnInit {
   books$= this._store.pipe(select(selectBooks));
 
   ngOnInit(): void {
-    // console.log(this._service.getBooks()); 
-
     this._store.dispatch(invokeBooksApi())
   }
 

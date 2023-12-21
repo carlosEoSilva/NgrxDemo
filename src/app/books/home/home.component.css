@@ -1,4 +1,26 @@
+.card-container{
+    display: inline-block;
+    align-content: top;
+    vertical-align: middle;
+}
+
 .book-card{
     width: 250px;
     margin-left: 15px;
+    margin-top: 15px;
+}
+
+.book-cover{
+    margin: 0 3px 0 5px;
+    border: solid 1px white;
+    width: 90px;
+    height: 110px;
+}
+
+.btn-warn{
+    background-color: #bd710d;
+}
+
+.btn-success{
+    background-color: #65B741;
 }
