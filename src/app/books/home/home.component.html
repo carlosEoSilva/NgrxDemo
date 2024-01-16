@@ -1,18 +1,18 @@
-<div *ngFor="let book of books$ | async" class="card-container">
+<div *ngFor="let livro of livros$ | async" class="card-container">
   <mat-card class="book-card">
 
     <mat-card-title-group>
-      <mat-card-title>{{ book.Title }}</mat-card-title>
-      <mat-card-subtitle>{{ book.Author }}</mat-card-subtitle>
-      <img class="book-cover" mat-card-md-image src="{{ book.Cover }}" >
+      <mat-card-title>{{ livro.Titulo }}</mat-card-title>
+      <mat-card-subtitle>{{ livro.Autor }}</mat-card-subtitle>
+      <img class="book-cover" mat-card-md-image src="{{ livro.Capa }}" >
     </mat-card-title-group>
     
     <mat-card-content>
-      R${{ book.Price }}
+      R${{ livro.Preco }}
     </mat-card-content>
 
     <mat-card-actions>
-      <button mat-button class="btn-warn" [routerLink]="['/edit', book.Id]">Update</button>
+      <button mat-button class="btn-warn" [routerLink]="['/edit', livro.Id]">Update</button>
       <button mat-button class="btn-success">Buy</button>
     </mat-card-actions>
 

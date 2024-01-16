@@ -2,16 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { selectBookById } from '../store/books.selector';
-import { Book } from '../store/book.class';
+import { selectBookById } from '../store/livros.selector';
+import { Livro } from '../store/livro.class';
 import { switchMap } from 'rxjs';
-import { invokeDeleteBookApi, invokeUpdateBookApi } from '../store/books.action';
-import { selectAppState } from 'src/app/shared/store/app.selector';
+import { editarLivroApi } from '../store/livros.action';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarComponent } from 'src/app/shared/snackbar/snackbar.component';
-import { IAppstate } from 'src/app/shared/store/appstate.interface';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 
 @Component({
   selector: 'app-edit-books',
@@ -23,14 +20,13 @@ export class EditBooksComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private _store:Store,
-    private _appStore:Store<IAppstate>,
     private _router:Router,
     private _snackBar: MatSnackBar,
     private _route:ActivatedRoute) { }
 
-  public bookToUpdate= new Book();
-  public defaultCover:string= "../../../assets/Books/Images/default-cover.jpg";
-  public coverPreview:string= this.defaultCover;
+  public livroEditar= new Livro();
+  public capaPadrao:string= "../../../assets/Books/Images/default-cover.jpg";
+  public capaPreview:string= this.capaPadrao;
 
   ngOnInit(): void {
     let fetchFormData$= this._route.paramMap.pipe(
@@ -42,8 +38,8 @@ export class EditBooksComponent implements OnInit {
 
     fetchFormData$.subscribe((data)=>{
       if(data){
-        this.bookToUpdate= {...data};
-        this.coverPreview= data.Cover;
+        this.livroEditar= {...data};
+        this.capaPreview= data.Capa;
       }
       else{
         this._router.navigate(['/']);
@@ -51,37 +47,32 @@ export class EditBooksComponent implements OnInit {
     })
   }
 
-  public updateBook(form:NgForm){
+  public editarLivro(form:NgForm){
 
     if(!form.valid){
       this.openSnackBar();
       return
     }
 
-    this.bookToUpdate.Author= form.value.bookAuthor;
-    this.bookToUpdate.Cover= form.value.bookCover;
-    this.bookToUpdate.Price= form.value.bookPrice;
-    this.bookToUpdate.Title= form.value.bookTitle;
+    this.livroEditar.Autor= form.value.autor;
+    this.livroEditar.Capa= form.value.capa;
+    this.livroEditar.Preco= form.value.preco;
+    this.livroEditar.Titulo= form.value.titulo;
 
-    this._store.dispatch(invokeUpdateBookApi({ updatedBook: this.bookToUpdate }));
+    console.log('A-'); console.log(this.livroEditar);
 
-    let appStatus$= this._appStore.pipe(select(selectAppState));
+    this._store.dispatch(editarLivroApi({ livroEditado: this.livroEditar }));
 
-    appStatus$.subscribe((data)=>{
-      if(data.apiStatus === 'success')
-        this._router.navigate(['/']);
-    });
-
-    
+    this._router.navigate(['/']);
   }
 
   public preview(cover:NgModel){
     console.log(cover.value);
 
     if(cover.value != '')
-      this.coverPreview= cover.value;
+      this.capaPreview= cover.value;
     else
-      this.coverPreview= this.defaultCover;
+      this.capaPreview= this.capaPadrao;
   }
 
   public openSnackBar() {
@@ -98,17 +89,6 @@ export class EditBooksComponent implements OnInit {
     });
   }
 
-  deleteBook(){
-    this._store.dispatch(invokeDeleteBookApi({ id: this.bookToUpdate.Id }));
-
-    let appStatus$= this._appStore.pipe(select(selectAppState));
-    appStatus$.subscribe((data)=>{
-      if(data.apiStatus === "success")
-        this._router.navigate(['/']);
-    });
-
-    this.openSnackBarDelete();
-  }
 
   
 }

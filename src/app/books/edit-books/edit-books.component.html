@@ -2,13 +2,13 @@
   
   <div class="form-container">
 
-    <form #bookForm='ngForm' (ngSubmit)="updateBook(bookForm)">
+    <form #bookForm='ngForm' (ngSubmit)="editarLivro(bookForm)">
     <mat-form-field class="form-input" appearance="legacy">
       <mat-label>Title</mat-label>
       <input 
-        name="bookTitle"
-        [(ngModel)]="bookToUpdate.Title"
-        #bookName="ngModel"
+        name="titulo"
+        [(ngModel)]="livroEditar.Titulo"
+        #titulo="ngModel"
         matInput 
         required
         placeholder="">
@@ -17,9 +17,9 @@
     <mat-form-field class="form-input" appearance="legacy">
       <mat-label>Author</mat-label>
       <input 
-        name="bookAuthor"
-        [(ngModel)]="bookToUpdate.Author"
-        #bookAuthor="ngModel"
+        name="autor"
+        [(ngModel)]="livroEditar.Autor"
+        #autor="ngModel"
         required
         matInput 
         placeholder="">
@@ -28,11 +28,11 @@
     <mat-form-field class="form-input" appearance="legacy">
       <mat-label>Cover Url</mat-label>
       <input 
-        name="bookCover"
-        [(ngModel)]="bookToUpdate.Cover"
-        #bookCover="ngModel"
+        name="capa"
+        [(ngModel)]="livroEditar.Capa"
+        #capa="ngModel"
         required
-        (focusout)="preview(bookCover)"
+        (focusout)="preview(capa)"
         matInput 
         placeholder="">
     </mat-form-field>
@@ -40,23 +40,20 @@
     <mat-form-field class="form-input" appearance="legacy">
       <mat-label>Price</mat-label>
       <input 
-        name="bookPrice"
-        [(ngModel)]="bookToUpdate.Price"
-        #bookPrice="ngModel"
+        name="preco"
+        [(ngModel)]="livroEditar.Preco"
+        #preco="ngModel"
         required
         matInput 
         placeholder="">
     </mat-form-field>
 
     <button type="submit" class="btn-save" mat-button color="primary">Save</button>
-
-    <button (click)="deleteBook()" class="btn-delete" mat-button color="primary">Delete</button>
+    
     </form>
-
-
   </div>
 
   <div class="cover-container">
-    <img class="cover-preview" [src]="coverPreview">  
+    <img class="cover-preview" [src]="capaPreview">  
   </div>
 </div> 

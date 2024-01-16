@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BooksService } from '../books.service';
 import { Store, select } from '@ngrx/store';
-import { selectBooks } from '../store/books.selector';
-import { invokeBooksApi } from '../store/books.action';
+import { selectBooks } from '../store/livros.selector';
+import { buscarLivrosApi } from '../store/livros.action';
 
 @Component({
   selector: 'app-home',
@@ -10,16 +9,13 @@ import { invokeBooksApi } from '../store/books.action';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  store: any;
 
-  constructor(
-    private _service:BooksService, 
-    private _store:Store) { }
+  constructor(private _store:Store) { }
 
-  books$= this._store.pipe(select(selectBooks));
+  livros$= this._store.pipe(select(selectBooks));
 
   ngOnInit(): void {
-    this._store.dispatch(invokeBooksApi())
+    this._store.dispatch(buscarLivrosApi());
   }
 
 }

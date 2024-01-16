@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, NgForm, NgModel } from '@angular/forms';
-import { BooksService } from '../books.service';
+import { LivrosServico } from '../livros.service';
 import { Store, select } from '@ngrx/store';
-import { invokeSaveBookApi } from '../store/books.action';
-import { Book } from '../store/book.class';
+import { salvarLivroApi } from '../store/livros.action';
+import { Livro } from '../store/livro.class';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { IAppstate } from 'src/app/shared/store/appstate.interface';
-import { selectAppState } from 'src/app/shared/store/app.selector';
-import { setApiStatus } from 'src/app/shared/store/app.action';
 import { SnackbarComponent } from 'src/app/shared/snackbar/snackbar.component';
 
 @Component({
@@ -19,10 +16,9 @@ import { SnackbarComponent } from 'src/app/shared/snackbar/snackbar.component';
 export class AddBooksComponent implements OnInit {
 
   constructor(
-    private _service:BooksService, 
+    private _servico:LivrosServico, 
     private _store:Store,
     private _snackBar: MatSnackBar,
-    private _appStore:Store<IAppstate>,
     private _router:Router) { }
 
     defaultCover:string= "../../../assets/Books/Images/default-cover.jpg";
@@ -47,28 +43,17 @@ export class AddBooksComponent implements OnInit {
       return
     }
 
-    let newBook= new Book(
-      this._service.getBookNextId(),
+    let newBook= new Livro(
+      this._servico.getProximoId(),
       form.value.bookTitle,
       form.value.bookAuthor,
       form.value.bookCover,
       form.value.bookPrice
     );
 
-    this._store.dispatch(invokeSaveBookApi({ newBook: newBook }));
+    this._store.dispatch(salvarLivroApi({ novoLivro: newBook }));
     
-    let appStatus$= this._appStore.pipe(select(selectAppState));
-
-    appStatus$.subscribe((data)=>{
-      if(data.apiStatus === 'success'){
-        //-não entendi porque está resentando o estado da api novamente.
-        this._appStore.dispatch(
-          setApiStatus({ apiStatus:{apiStatus: '', apiResponseMessage: ''}})//-resetando o estado global da api
-        );
-        this._router.navigate(['/']);
-      }
-    });
-
+    this._router.navigate(['/']);
     this.openSnackBarSave();
   }
 
@@ -80,7 +65,7 @@ export class AddBooksComponent implements OnInit {
   }
 
   openSnackBarSave() {
-    this._snackBar.open("Book saved", "", {
+    this._snackBar.open("Cadastro efetuado", "", {
       duration: 3000,
       panelClass: 'snack-bar'
     });
